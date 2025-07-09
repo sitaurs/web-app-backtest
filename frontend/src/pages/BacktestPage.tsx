@@ -67,8 +67,8 @@ const BacktestPage: React.FC = () => {
         setDefaultPrompts(response.data);
         setFormData(prev => ({
           ...prev,
-          analysisPrompt: response.data.analysisPrompt,
-          extractorPrompt: response.data.extractorPrompt,
+          analysisPrompt: response.data!.analysisPrompt,
+          extractorPrompt: response.data!.extractorPrompt,
         }));
       }
     } catch (error) {
