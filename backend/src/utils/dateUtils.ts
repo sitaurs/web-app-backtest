@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export interface TimeWindow {
   start: Date;
