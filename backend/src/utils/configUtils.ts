@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import type { StringValue } from 'ms';
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../../../.env') });
@@ -8,7 +9,7 @@ export interface AppConfig {
   port: number;
   nodeEnv: string;
   jwtSecret: string;
-  jwtExpiresIn: string;
+  jwtExpiresIn: StringValue | number;
   apiKeys: {
     geminiPro: string;
     geminiFlash: string;
@@ -37,7 +38,7 @@ const config: AppConfig = {
   port: parseInt(process.env.PORT || '5000', 10),
   nodeEnv: process.env.NODE_ENV || 'development',
   jwtSecret: process.env.JWT_SECRET || 'fallback-secret-key',
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN || '24h',
+  jwtExpiresIn: (process.env.JWT_EXPIRES_IN as StringValue | undefined) || '24h',
   apiKeys: {
     geminiPro: process.env.API_KEY_GEMINI_PRO || '',
     geminiFlash: process.env.API_KEY_GEMINI_FLASH || '',
