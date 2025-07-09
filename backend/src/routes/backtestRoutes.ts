@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { body, param } from 'express-validator';
 import {
   runBacktest,
@@ -135,7 +135,7 @@ router.get(
   '/validate-symbol/:symbol',
   protect,
   param('symbol').isString().isLength({ min: 6, max: 6 }),
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request, res: Response) => {
     const { symbol } = req.params;
     const isValid = /^[A-Z]{6}$/.test(symbol);
     
@@ -158,7 +158,7 @@ router.get(
 router.get(
   '/default-prompts',
   protect,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request, res: Response) => {
     const defaultPrompts = {
       analysisPrompt: `You are an expert forex trader and technical analyst. Analyze the provided multi-timeframe charts and OHLCV data to determine potential trading opportunities.
 
@@ -214,7 +214,7 @@ Be precise and decisive in your extraction.`
 router.get(
   '/stats',
   protect,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request, res: Response) => {
     // This would typically fetch from database
     // For now, return mock statistics
     const stats = {
