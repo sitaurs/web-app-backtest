@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
       const response = await authService.login(email, password);
       
-      if (response.success) {
+      if (response.success && response.data) {
         setUser(response.data.user);
         localStorage.setItem('token', response.data.token);
         toast.success('Login successful!');
@@ -73,7 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
       const response = await authService.register(username, email, password);
       
-      if (response.success) {
+      if (response.success && response.data) {
         setUser(response.data.user);
         localStorage.setItem('token', response.data.token);
         toast.success('Registration successful!');
@@ -100,7 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authService.updateProfile(profileData);
       
-      if (response.success) {
+      if (response.success && response.data) {
         setUser(response.data.user);
         toast.success('Profile updated successfully');
         return true;
@@ -118,7 +118,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authService.updateSettings(settingsData);
       
-      if (response.success) {
+      if (response.success && response.data) {
         // Update user settings in context
         if (user) {
           setUser({
